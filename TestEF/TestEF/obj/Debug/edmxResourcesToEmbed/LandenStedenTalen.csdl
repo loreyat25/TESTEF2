@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EFLandenStedenTalenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Land">
+    <Key>
+      <PropertyRef Name="LandCode" />
+    </Key>
+    <Property Name="LandCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Steden" Relationship="Self.FK__Steden__LandCode__267ABA7A" FromRole="Landen" ToRole="Steden" />
+    <NavigationProperty Name="Talen" Relationship="Self.LandenTalen" FromRole="Landen" ToRole="Talen" />
+  </EntityType>
+  <EntityType Name="Stad">
+    <Key>
+      <PropertyRef Name="StadNr" />
+    </Key>
+    <Property Name="StadNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LandCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Landen" Relationship="Self.FK__Steden__LandCode__267ABA7A" FromRole="Steden" ToRole="Landen" />
+  </EntityType>
+  <EntityType Name="Taal">
+    <Key>
+      <PropertyRef Name="TaalCode" />
+    </Key>
+    <Property Name="TaalCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Naam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Landen" Relationship="Self.LandenTalen" FromRole="Talen" ToRole="Landen" />
+  </EntityType>
+  <Association Name="FK__Steden__LandCode__267ABA7A">
+    <End Role="Landen" Type="EFLandenStedenTalenModel.Land" Multiplicity="1" />
+    <End Role="Steden" Type="EFLandenStedenTalenModel.Stad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Landen">
+        <PropertyRef Name="LandCode" />
+      </Principal>
+      <Dependent Role="Steden">
+        <PropertyRef Name="LandCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LandenTalen">
+    <End Role="Landen" Type="EFLandenStedenTalenModel.Land" Multiplicity="*" />
+    <End Role="Talen" Type="EFLandenStedenTalenModel.Taal" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="EFLandenStedenTalenEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Landen" EntityType="EFLandenStedenTalenModel.Land" />
+    <EntitySet Name="Steden" EntityType="EFLandenStedenTalenModel.Stad" />
+    <EntitySet Name="Talen" EntityType="EFLandenStedenTalenModel.Taal" />
+    <AssociationSet Name="FK__Steden__LandCode__267ABA7A" Association="Self.FK__Steden__LandCode__267ABA7A">
+      <End Role="Landen" EntitySet="Landen" />
+      <End Role="Steden" EntitySet="Steden" />
+    </AssociationSet>
+    <AssociationSet Name="LandenTalen" Association="Self.LandenTalen">
+      <End Role="Landen" EntitySet="Landen" />
+      <End Role="Talen" EntitySet="Talen" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

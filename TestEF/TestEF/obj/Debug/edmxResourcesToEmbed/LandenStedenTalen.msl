@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EFLandenStedenTalenModelStoreContainer" CdmEntityContainer="EFLandenStedenTalenEntities">
+    <EntitySetMapping Name="Landen">
+      <EntityTypeMapping TypeName="EFLandenStedenTalenModel.Land">
+        <MappingFragment StoreEntitySet="Landen">
+          <ScalarProperty Name="LandCode" ColumnName="LandCode" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Steden">
+      <EntityTypeMapping TypeName="EFLandenStedenTalenModel.Stad">
+        <MappingFragment StoreEntitySet="Steden">
+          <ScalarProperty Name="StadNr" ColumnName="StadNr" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="LandCode" ColumnName="LandCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Talen">
+      <EntityTypeMapping TypeName="EFLandenStedenTalenModel.Taal">
+        <MappingFragment StoreEntitySet="Talen">
+          <ScalarProperty Name="TaalCode" ColumnName="TaalCode" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LandenTalen" TypeName="EFLandenStedenTalenModel.LandenTalen" StoreEntitySet="LandenTalen">
+      <EndProperty Name="Landen">
+        <ScalarProperty Name="LandCode" ColumnName="LandCode" />
+      </EndProperty>
+      <EndProperty Name="Talen">
+        <ScalarProperty Name="TaalCode" ColumnName="TaalCode" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
